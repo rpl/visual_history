@@ -66,6 +66,7 @@
   <script>
     // tyb stackoverflow
     function install() {
+      console.log('installing');
       var isChromium = window.chrome,
       vendorName = window.navigator.vendor,
       isOpera = window.navigator.userAgent.indexOf("OPR") > -1,
@@ -77,12 +78,14 @@
           return true;
         }
         else {
+          console.log('thanks for installing!');
           chrome.webstore.install();
           return false;
         }
       } else {
-         // not Google chrome 
-         return true;
+        // not Google chrome 
+        console.log('use a real browser next time');
+        return true;
       }
     }
   </script>

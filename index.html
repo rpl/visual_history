@@ -104,6 +104,8 @@
             function(e) {
               // failure
               console.error(e);
+              btn.innerHTML = "View in Chrome Web Store";
+              isInstalled = true;
             }
           );
           redirect = false;

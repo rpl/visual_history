@@ -78,8 +78,16 @@
           return true;
         }
         else {
-          console.log('thanks for installing!');
-          chrome.webstore.install();
+          chrome.webstore.install(
+            "https://chrome.google.com/webstore/detail/nkckokcpjekkokllfplejfkocaikmnml",
+            function(e) {
+              // success
+              console.log('thanks for installing!', e);
+            }, 
+            function(e) {
+              // failure
+              console.error('installation failed', e);
+            });
           return false;
         }
       } else {

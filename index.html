@@ -72,9 +72,10 @@
     isOpera = window.navigator.userAgent.indexOf("OPR") > -1,
     isIEedge = window.navigator.userAgent.indexOf("Edge") > -1;
     var btn = document.getElementById('install');
-    if(isChromium !== null && isChromium !== undefined && vendorName === "Google Inc." && isOpera == false && isIEedge == false) {
+    if (isChromium !== null && isChromium !== undefined && vendorName === "Google Inc." && isOpera == false && isIEedge == false) {
       // is Google chrome
       isChrome = true;
+      console.log('chrome');
       if (document.getElementById('histree')) {
         // already installed
         console.log('installed');
@@ -89,6 +90,8 @@
     }
     else {
       // not Google chrome
+      console.log('not chrome')
+      console.log('not installed');
       btn.innerHTML = 'View in Chrome Web Store';
     }
     function install() {

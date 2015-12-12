@@ -17,7 +17,7 @@
       <h2 class="project-tagline">Back and forward buttons are obsolete. Visual History maps your walk on the internet graph.</h2>
       <a href="https://github.com/nDimensional/visual_history" class="btn">View on GitHub</a>
       <a href="https://github.com/nDimensional/visual_history/zipball/master" class="btn">Download .zip</a>
-      <a href="https://chrome.google.com/webstore/detail/visual-history/nkckokcpjekkokllfplejfkocaikmnml" id="install" onclick="return install()" class="btn">Add to Chrome</a>
+      <a href="https://chrome.google.com/webstore/detail/visual-history/nkckokcpjekkokllfplejfkocaikmnml" id="install-histree-button" onclick="return install()" class="btn">Add to Chrome</a>
     </section>
 
     <section class="main-content">
@@ -71,22 +71,11 @@
     vendorName = window.navigator.vendor,
     isOpera = window.navigator.userAgent.indexOf("OPR") > -1,
     isIEedge = window.navigator.userAgent.indexOf("Edge") > -1;
-    var btn = document.getElementById('install');
+    var btn = document.getElementById('install-histree-button');
     if (isChromium !== null && isChromium !== undefined && vendorName === "Google Inc." && isOpera == false && isIEedge == false) {
       // is Google chrome
       isChrome = true;
       console.log('chrome');
-      if (document.getElementById('histree')) {
-        // already installed
-        console.log('installed');
-        isInstalled = true;
-        btn.innerHTML = 'View in Chrome Web Store';
-      }
-      else {
-        // not installed
-        console.log('not installed');
-        btn.innerHTML = 'Add to Chrome';
-      }
     }
     else {
       // not Google chrome
@@ -97,10 +86,14 @@
     function install() {
       var redirect = true;
       if (isChrome) {
-        if (isInstalled) {
+        if (isInstalled || document.getElementById('histree')) {
+          // already installed
+          console.log('installed');
+          isInstalled = true;
           redirect = true;
         }
         else {
+          console.log('not installed');
           chrome.webstore.install(
             "https://chrome.google.com/webstore/detail/nkckokcpjekkokllfplejfkocaikmnml",
             function(e) {

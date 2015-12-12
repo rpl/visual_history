@@ -75,7 +75,7 @@
     if(isChromium !== null && isChromium !== undefined && vendorName === "Google Inc." && isOpera == false && isIEedge == false) {
       // is Google chrome
       isChrome = true;
-      if (chrome.app.isInstalled) {
+      if (document.getElementById('histree')) {
         // already installed
         isInstalled = true;
         btn.innerHTML = 'View in Chrome Web Store';
@@ -91,19 +91,33 @@
     }
     function install() {
       var redirect = true;
-      if (isChrome && !isInstalled) chrome.webstore.install(
-        "https://chrome.google.com/webstore/detail/nkckokcpjekkokllfplejfkocaikmnml",
-        function(e) {
-          // success
-          btn.innerHTML = "View in Chrome Web Store";
-          redirect = false;
-        },
-        function(e) {
-          // failure
-          console.error(e);
+      if (isChrome) {
+        if (isInstalled) {
+          redirect = true;
         }
-      );
-      return redirect;
+        else {
+          chrome.webstore.install(
+            "https://chrome.google.com/webstore/detail/nkckokcpjekkokllfplejfkocaikmnml",
+            function(e) {
+              // success
+              btn.innerHTML = "View in Chrome Web Store";
+              isInstalled = true;
+            },
+            function(e) {
+              // failure
+              console.error(e);
+              window.location = 'https://chrome.google.com/webstore/detail/nkckokcpjekkokllfplejfkocaikmnml';
+            }
+          );
+          redirect = false;
+        }
+      }
+      else {
+        redirect = true;
+      }
+      return redirect
+      if (isChrome && !isInstalled) 
+    return redirect;
     }
   </script>
 </html>

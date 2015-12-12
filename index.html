@@ -64,45 +64,46 @@
   
   </body>
   <script>
+    var isInstalled = false;
+    var isChrome = false;
     // tyb stackoverflow
-    var failure = false;
-    if (chrome && chrome.app && chrome.app.isInstalled) btn.innerHTML = "Installed";
-    function install() {
-      console.log('installing');
-      var isChromium = window.chrome,
-      vendorName = window.navigator.vendor,
-      isOpera = window.navigator.userAgent.indexOf("OPR") > -1,
-      isIEedge = window.navigator.userAgent.indexOf("Edge") > -1;
-      var btn = document.getElementById('install');
-      if(isChromium !== null && isChromium !== undefined && vendorName === "Google Inc." && isOpera == false && isIEedge == false) {
-         // is Google chrome
-        if (chrome.app.isInstalled) {
-          console.log('you\'ve already installed vh! thanks!');
-          btn.innerHTML = "View in Store";
-          return true;
-        }
-        else {
-          chrome.webstore.install(
-            "https://chrome.google.com/webstore/detail/nkckokcpjekkokllfplejfkocaikmnml",
-            function(e) {
-              // success
-              console.log('thanks for installing!', e);
-              btn.innerHTML = "Installed";
-              failure = false;
-            }, 
-            function(e) {
-              // failure
-              console.error('installation failed', e);
-              failure = true;
-            });
-          return failure;
-        }
-      } else {
-        // not Google chrome 
-        console.log('use a real browser next time');
-        btn.innerHTML = 'View in Store';
-        return true;
+    var isChromium = window.chrome,
+    vendorName = window.navigator.vendor,
+    isOpera = window.navigator.userAgent.indexOf("OPR") > -1,
+    isIEedge = window.navigator.userAgent.indexOf("Edge") > -1;
+    var btn = document.getElementById('install');
+    if(isChromium !== null && isChromium !== undefined && vendorName === "Google Inc." && isOpera == false && isIEedge == false) {
+      // is Google chrome
+      isChrome = true;
+      if (chrome.app.isInstalled) {
+        // already installed
+        isInstalled = true;
+        btn.innerHTML = 'View in Chrome Web Store';
       }
+      else {
+        // not installed
+        btn.innerHTML = 'Add to Chrome';
+      }
+    }
+    else {
+      // not Google chrome
+      btn.innerHTML = 'View in Chrome Web Store';
+    }
+    function install() {
+      var redirect = true;
+      if (isChrome && !isInstalled) chrome.webstore.install(
+        "https://chrome.google.com/webstore/detail/nkckokcpjekkokllfplejfkocaikmnml",
+        function(e) {
+          // success
+          btn.innerHTML = "View in Chrome Web Store";
+          redirect = false;
+        },
+        function(e) {
+          // failure
+          console.error(e);
+        }
+      );
+      return redirect;
     }
   </script>
 </html>

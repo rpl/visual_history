@@ -77,11 +77,13 @@
       isChrome = true;
       if (document.getElementById('histree')) {
         // already installed
+        console.log('installed');
         isInstalled = true;
         btn.innerHTML = 'View in Chrome Web Store';
       }
       else {
         // not installed
+        console.log('not installed');
         btn.innerHTML = 'Add to Chrome';
       }
     }

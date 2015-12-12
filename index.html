@@ -65,16 +65,19 @@
   </body>
   <script>
     // tyb stackoverflow
+    var failure = false;
     function install() {
       console.log('installing');
       var isChromium = window.chrome,
       vendorName = window.navigator.vendor,
       isOpera = window.navigator.userAgent.indexOf("OPR") > -1,
       isIEedge = window.navigator.userAgent.indexOf("Edge") > -1;
+      var btn = document.getElementById('install');
       if(isChromium !== null && isChromium !== undefined && vendorName === "Google Inc." && isOpera == false && isIEedge == false) {
          // is Google chrome
         if (chrome.app.isInstalled) {
           console.log('you\'ve already installed vh! thanks!');
+          btn.innerHTML = "View in Store";
           return true;
         }
         else {
@@ -83,16 +86,20 @@
             function(e) {
               // success
               console.log('thanks for installing!', e);
+              btn.innerHTML = "Installed";
+              failure = false;
             }, 
             function(e) {
               // failure
               console.error('installation failed', e);
+              failure = true;
             });
-          return false;
+          return failure;
         }
       } else {
         // not Google chrome 
         console.log('use a real browser next time');
+        btn.innerHTML = 'View in Store';
         return true;
       }
     }

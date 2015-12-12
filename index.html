@@ -66,6 +66,7 @@
   <script>
     // tyb stackoverflow
     var failure = false;
+    if (chrome && chrome.app && chrome.app.isInstalled) btn.innerHTML = "Installed";
     function install() {
       console.log('installing');
       var isChromium = window.chrome,

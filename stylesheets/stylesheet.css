@@ -15,6 +15,10 @@ a {
   a:hover {
     text-decoration: underline; }
 
+img {
+  border:1px solid #021a40;
+}
+
 .btn {
   display: inline-block;
   margin-bottom: 1rem;

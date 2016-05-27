@@ -12,7 +12,7 @@
   ],
   "background": {
     "persistent": true,
-    "scripts": ["color-thief.min.js", "background.min.js"]
+    "scripts": ["color-thief.min.js", "background.js"]
   },
   "content_scripts": [
     {

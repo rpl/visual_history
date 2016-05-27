@@ -135,11 +135,11 @@ chrome.webNavigation.onCompleted.addListener(function(details) {
                     if (!current.icon_url) current.icon_url = tab.favIconUrl;
                     if (tab.title) current.title = tab.title;
                     var img = new Image;
-                    img.onload = function() { current.img_color = colorThief.getColor(img); };
-                    img.src = tab.favIconUrl;
+                    //img.onload = function() { current.img_color = colorThief.getColor(img); };
+                    //img.src = tab.favIconUrl;
                 }
             });
-            //takeScreenshot(tabs[details.tabId].current);
+            takeScreenshot(tabs[details.tabId].current);
         }
     }
 });
@@ -166,7 +166,7 @@ function onNavigateTo(tabId, url, processId) {
 
 function takeScreenshot(node) {
     chrome.tabs.captureVisibleTab(null, {format: 'png'}, function (dataUrl) {
-        if (dataUrl) node.image_url = dataUrl;
+        if (dataUrl) node.icon_url = dataUrl;
     });
 }
 
